@@ -32,27 +32,6 @@ class Cliente_c
         ]);
     }
 
-    public function form($data)
-    {
-        $activevenda = " ";
-        $acticliente = "active z-depth-5";
-        $actiproduto = " ";
-        $url = URL_BASE;
-        $clientes = new Cliente();
-        $namecliente = "";
-        $idcliente = "";
-        $edtadd = "add";
-
-        // Select
-        if(isset($data['id'])):
-            $selectcliente = $clientes->findById($data['id']);
-            $namecliente = $selectcliente->NOME;
-            $idcliente = $selectcliente->ID_CLI;
-            $edtadd = "edt";            
-        endif;
-                       
-        require __DIR__ . "/../../views/cliente_form.php";
-    }
     
     public function edt($data)
     {
@@ -67,11 +46,11 @@ class Cliente_c
             if (!$selectcliente->fail()):
                 $_SESSION['mensagem'] = "Alterado com sucesso!";
                 //header ('Location: ../cliente');
-                echo json_encode($_SESSION);
+                //echo json_encode($_SESSION);
             else:
                 $_SESSION['mensagem'] = "Falha ao alterar!";
                 //header ('Location: ../cliente');
-                echo json_encode($_SESSION);
+                //echo json_encode($_SESSION);
             endif;
         endif;
     }
@@ -107,23 +86,17 @@ class Cliente_c
 	        $selectcliente = $clientes->findById($data['id']);
         endif;
 
-        // var_dump($selectcliente);
-
         $selectcliente->destroy();
         
         if (!$selectcliente->fail()):
             $_SESSION['mensagem'] = "Dado deletado com sucesso!";
-            // header ('Location: ../cliente');
-            
-            
+            // header ('Location: ../cliente');            
         else:
             $_SESSION['mensagem'] = "Falha ao deletar!";
             // header ('Location: ../cliente');// Render a template
             
         endif;
         
-               
-        // require __DIR__ . "/../../views/cliente.php";
     }
 
     public function error($data)
