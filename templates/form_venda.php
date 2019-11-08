@@ -3,7 +3,26 @@
 <div class="container-fluid py-2">
     <div class="row">
         <div class="col-lg-5 pb-3 mx-auto bg-white rounded shadow">
-            <?=var_dump($itens);?> 
+            <div class="form-group">
+                <label for="formGroupExampleInput">ID:</label>
+                <label for="formGroupExampleInput"><?=$this->e($ID_VEND);?></label>
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Nome:</label>
+                <input type="text" class="form-control"
+                                    aria-label="Sizing example input" 
+                                    aria-describedby="inputGroup-sizing-sm" name="ID_VEND" 
+                                    id="ID_VEND" autocomplete="off"
+                                    value="<?=$this->e($nome);?>">
+            </div>
+
+
+
+            <button id="btn_fechar" type="button" class="btn btn-secondary">Fechar</button>
+            <button id="edt" type="button" class="btn btn-primary">Salvar mudanças</button>
+               
+                
+                
         </div>
     
         <div class="col-lg-5 pb-3 mx-auto bg-white rounded shadow">
@@ -72,21 +91,25 @@
     <script>
         // Some JavaScript
         $(document).ready(function () {
-        $('#dtTabitens').DataTable({
-            "scrollY": 320,
-            "searching": false,
-            "lengthChange": false,
-            "pageLength": 7,
-            "info": true,
-            "ordering": false,
-            "language": {
-                "paginate": {
-                    "next": "<i class='material-icons'>skip_next</i>",
-                    "previous": "<i class='material-icons'>skip_previous</i>"
+            $('#dtTabitens').DataTable({
+                "scrollY": 320,
+                "searching": false,
+                "lengthChange": false,
+                "pageLength": 7,
+                "info": true,
+                "ordering": false,
+                "language": {
+                    "paginate": {
+                        "next": "<i class='material-icons'>skip_next</i>",
+                        "previous": "<i class='material-icons'>skip_previous</i>"
+                    }
                 }
-            }
-        });
+            });
         $('.dataTables_length').addClass('bs-select');
+        });
+        
+        $("#btn_fechar").on('click',function() {
+            window.location.href = '<?=URL_BASE?>/venda';
         });
         
     

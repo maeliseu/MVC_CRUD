@@ -10,7 +10,7 @@ define("DATA_LAYER_CONFIG", [
     "port" => "3306",
     "dbname" => "ava1",
     "username" => "root",
-    "passwd" => "123mudar",
+    "passwd" => "",
     "options" => [
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

@@ -56,9 +56,9 @@ class Venda_c
    
     public function formulario($data)
     {
-        var_dump($data);
-        $ID_VEND = $data->id;
-        $FK_CLIENTE_ID_CLI = $data->FK_CLIENTE_ID_CLI;
+        // var_dump($data);
+        $ID_VEND = $data["id"];
+        $FK_CLIENTE_ID_CLI = $data["FK_CLIENTE_ID_CLI"];
         
         foreach ($this->itens->find("FK_VENDA_ID_VEND = :ID", "ID=$ID_VEND")->fetch(true) as $lista){
             $descricao = $this->produtos->find("ID_PROD = :ID", "ID=$lista->FK_PRODUTO_ID_PROD")->fetch();
@@ -72,9 +72,11 @@ class Venda_c
         }
 
         echo $this->templates->render('/form_venda', [
-            'ID_VEND'        => $ID_VEND,
+            'ID_VEND'       => $ID_VEND,
+            'nome'          => $data["nome"],
             'FK_CLIENTE_ID_CLI' => $FK_CLIENTE_ID_CLI,
             'clientes'      => $this->clientes->find()->fetch(true),
+            'produtos'      => $this->produtos->find()->fetch(true),
             'itens'         => $listaitens
         ]);
     }

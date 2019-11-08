@@ -55,7 +55,7 @@ $router->get("/{errcode}", "Web_c:error");
 $router->dispatch();
 
 if($router->error()) {
-    // var_dump($router);
+    var_dump($router);
     $router->redirect("/ooops/{$router->error()}");
 }
 
