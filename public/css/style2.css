@@ -12,16 +12,40 @@
     font-size: 16px;
 }
 
-table.table td a {
+table.table td button {
     cursor: pointer;
-    margin: 0 10px;    
-}    
-table.table td a.add {
+    margin: 0 5px;
+    font-size: 17px;
+    padding: 0 5px;
+        
+}
+
+
+table.table td button.add {
     color: #27C46B;
 }
-table.table td a.edit {
+table.table td button.add:hover {
+    /* background-color: #27C46B; */
+    color: black;
+}
+
+
+table.table td button.edit {
     color: #FFC107;
 }
-table.table td a.delete {
+table.table td button.edit:hover {
+    /* background-color: #FFC107; */
+    color: black;
+    /* font-size: 19px; */
+    
+
+}
+
+
+table.table td button.delete {
     color: #E34724;
+}
+table.table td button.delete:hover {
+    /* background-color: #E34724; */
+    color: black;
 }

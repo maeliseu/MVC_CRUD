@@ -1,13 +1,22 @@
 <?php $this->layout('layout', []) ?>
 
 <div class="container-fluid py-2">
-        <div class="col-lg-6 pb-3 mx-auto bg-white rounded shadow">
+        <div class="col-lg-9 pb-3 mx-auto bg-white rounded shadow">
             <table id="dtTabVenda" class="table">
                 <thead>
-                    <td><h5>Vendas: <a title="Adicionar" class="add add_data"><i class="material-icons add">add</i></a></h5></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <tr>
+                        <td>
+                            <h5>Vendas: <button type="button" 
+                                                title="Adicionar" 
+                                                class="btn btn-default btn-sm add add_data">
+                                            <i class="fas fa-plus-circle" style="font-size:36px;"></i>
+                                        </button>
+                            </h5>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     <tr>
                         <th>ID:</th>
                         <th>CLIENTE:</th>
@@ -22,8 +31,26 @@
                         <td><?=$this->e($venda["NOME"])?></td>
                         <td><?=$this->e($venda["DATA"])?></td>
                         <td>
-                        <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                        <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                            <button type="button" 
+                                class="btn btn-default btn-sm edit edit_data"
+                                title="Edit" 
+                                data-toggle="tooltip"
+                                data-sel_ID_VENDA="<?=$this->e($venda["ID_VEND"])?>"
+                                data-sel_NOME="<?=$this->e($venda["NOME"])?>"
+                                data-sel_DATA="<?=$this->e($venda["DATA"])?>"
+                                data-sel_FK_CLIENTE_ID_CLI="<?=$this->e($venda["FK_CLIENTE_ID_CLI"])?>">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <!-- <button type="button" 
+                                class="btn btn-default btn-sm delete"
+                                title="Delete" 
+                                data-toggle="tooltip"
+                                data-sel_ID_VENDA="<?=$this->e($venda["ID_VEND"])?>"
+                                data-sel_NOME="<?=$this->e($venda["NOME"])?>"
+                                data-sel_DATA="<?=$this->e($venda["DATA"])?>"
+                                data-sel_FK_CLIENTE_ID_CLI="<?=$this->e($venda["FK_CLIENTE_ID_CLI"])?>">
+                                <i class="fas fa-trash-alt"></i>
+                            </button> -->
                         </td>
                     </tr>
             <?php   } ?> 
@@ -42,10 +69,10 @@
         // Some JavaScript
         $(document).ready(function () {
         $('#dtTabVenda').DataTable({
-            "scrollY": 300,
+            "scrollY": 320,
             "searching": false,
             "lengthChange": false,
-            "pageLength": 8,
+            "pageLength": 7,
             "info": true,
             "ordering": false,
             "language": {

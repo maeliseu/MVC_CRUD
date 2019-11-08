@@ -4,8 +4,12 @@
 <div class="container-fluid py-2">
     <div class="col-lg-9 pb-3 mx-auto bg-white rounded shadow">
         <table id="dtTabCliente" class="table">
-            <thead>
-                <td><h5>Clientes: <a title="Adicionar" class="add add_data"><i class="material-icons add">add</i></a></h5></td>
+            <thead>  
+                <td><h5>Clientes: <button type="button" title="Adicionar" class="btn btn-default btn-sm add add_data">
+                    <i class="fas fa-plus-circle" style="font-size:36px;"></i>
+                    </button></h5> 
+                    
+                </td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -23,20 +27,23 @@
                     <td><?=$this->e($cliente->NOME)?></td>
                     <td></td>
                     <td>
-                        <a  class="edit edit_data"
+                        <button type="button" 
+                            class="btn btn-default btn-sm edit edit_data"
                             title="Edit" 
                             data-toggle="tooltip"
                             data-sel_id="<?=$this->e($cliente->ID_CLI)?>"
-                            data-sel_nome="<?=$this->e($cliente->NOME)?>">
-                            <i class="material-icons">&#xE254;</i>
-                        </a>
-                        <a  class="delete"
+                            data-sel_nome="<?=$this->e($cliente->NOME)?>">                            
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        
+                        <button type="button" 
+                            class="btn btn-default btn-sm delete"
                             title="Delete" 
                             data-toggle="tooltip"
                             data-sel_id="<?=$this->e($cliente->ID_CLI)?>"
                             data-sel_nome="<?=$this->e($cliente->NOME)?>">
-                            <i class="material-icons">&#xE872;</i>
-                        </a>
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </td>
                 </tr>
         <?php   } ?> 
@@ -76,16 +83,17 @@
 
 <?php $this->push('scripts') ?>
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script> 
-    <script>
+
+    <script id="codigoJs" type="text/javascript">
         // ###       
         // ###------> tabela
         // ###
         $(document).ready(function () {
             $('#dtTabCliente').DataTable({
-                "scrollY": 300,
+                "scrollY": 320,
                 "searching": false,
                 "lengthChange": false,
-                "pageLength": 8,
+                "pageLength": 7,
                 "info": true,
                 "ordering": false,
                 "language": {
@@ -224,14 +232,16 @@
             });
                 
         });
-
-        
-
     </script>
 <?php $this->end() ?>
 
 <?php $this->push('stylesheets') ?>
     <!-- stylesheets -->
+    
+    
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+    
+    
     
 <?php $this->end() ?>
