@@ -56,8 +56,9 @@ class Venda_c
    
     public function formulario($data)
     {
-        $ID_VEND = "1";
-        $FK_CLIENTE_ID_CLI = "10";
+        var_dump($data);
+        $ID_VEND = $data->id;
+        $FK_CLIENTE_ID_CLI = $data->FK_CLIENTE_ID_CLI;
         
         foreach ($this->itens->find("FK_VENDA_ID_VEND = :ID", "ID=$ID_VEND")->fetch(true) as $lista){
             $descricao = $this->produtos->find("ID_PROD = :ID", "ID=$lista->FK_PRODUTO_ID_PROD")->fetch();

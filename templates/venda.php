@@ -35,10 +35,10 @@
                                 class="btn btn-default btn-sm edit edit_data"
                                 title="Edit" 
                                 data-toggle="tooltip"
-                                data-sel_ID_VENDA="<?=$this->e($venda["ID_VEND"])?>"
-                                data-sel_NOME="<?=$this->e($venda["NOME"])?>"
-                                data-sel_DATA="<?=$this->e($venda["DATA"])?>"
-                                data-sel_FK_CLIENTE_ID_CLI="<?=$this->e($venda["FK_CLIENTE_ID_CLI"])?>">
+                                data-sel_ID_VENDA='<?=$this->e($venda["ID_VEND"])?>'
+                                data-sel_NOME='<?=$this->e($venda["NOME"])?>'
+                                data-sel_DATA='<?=$this->e($venda["DATA"])?>'
+                                data-sel_FK_CLIENTE_ID_CLI='<?=$this->e($venda["FK_CLIENTE_ID_CLI"])?>'>
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
                             <!-- <button type="button" 
@@ -87,9 +87,12 @@
             $('.dataTables_length').addClass('bs-select');
         });
         // ###
-        // ###------> botão add (abre form_venda)
+        // ###------> botão edit (abre form_venda)
         // ###
-        $(document).on('click', '.add_data', function(){
+        $(document).on('click', '.edit_data', function(){
+            var ID_VENDA = $(this).data('sel_ID_VENDA');
+            var FK_CLIENTE_ID_CLI = $(this).data('sel_FK_CLIENTE_ID_CLI');
+            console.log ("id : "+ID_VENDA+" / FK_CLIENTE_ID_CLI : "+FK_CLIENTE_ID_CLI )
             let form = document.createElement('form');
             form.action = "venda/formulario";
             form.method = 'POST';
@@ -97,19 +100,25 @@
             my_tb=document.createElement('INPUT');
             my_tb.type='TEXT';
             my_tb.name='comando';
-            my_tb.value='new';
+            my_tb.value='edt';
             form.appendChild(my_tb);
 
             my_tb=document.createElement('INPUT');
             my_tb.type='TEXT';
             my_tb.name='id';
-            my_tb.value='2';
+            my_tb.value= ID_VENDA;
+            form.appendChild(my_tb);
+
+            my_tb=document.createElement('INPUT');
+            my_tb.type='TEXT';
+            my_tb.name='FK_CLIENTE_ID_CLI';
+            my_tb.value= FK_CLIENTE_ID_CLI;
             form.appendChild(my_tb);
             
             // the form must be in the document to submit it
             document.body.append(form);
 
-            form.submit();
+            // form.submit();
             
         });
     </script>
