@@ -40,7 +40,8 @@ $router->post("/delete", "Produto_c:delete");
  */
 $router->group("venda");
 $router->get("/", "Venda_c:venda");
-$router->post("/add", "Venda_c:add");
+$router->get("/formulario", "Venda_c:formulario");
+$router->post("/formulario", "Venda_c:formulario");
 $router->post("/edt", "Venda_c:edt");
 $router->post("/delete", "Venda_c:delete");
 

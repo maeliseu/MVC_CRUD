@@ -64,27 +64,54 @@
 </div>
 
 <?php $this->push('scripts') ?>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
     <script>
         // Some JavaScript
         $(document).ready(function () {
-        $('#dtTabVenda').DataTable({
-            "scrollY": 320,
-            "searching": false,
-            "lengthChange": false,
-            "pageLength": 7,
-            "info": true,
-            "ordering": false,
-            "language": {
-                "paginate": {
-                    "next": "<i class='material-icons'>skip_next</i>",
-                    "previous": "<i class='material-icons'>skip_previous</i>"
+            $('#dtTabVenda').DataTable({
+                "scrollY": 320,
+                "searching": false,
+                "lengthChange": false,
+                "pageLength": 7,
+                "info": true,
+                "ordering": false,
+                "language": {
+                    "paginate": {
+                        "next": "<i class='material-icons'>skip_next</i>",
+                        "previous": "<i class='material-icons'>skip_previous</i>"
+                    }
                 }
-            }
+            });
+            $('.dataTables_length').addClass('bs-select');
         });
-        $('.dataTables_length').addClass('bs-select');
+        // ###
+        // ###------> botão add (abre form_venda)
+        // ###
+        $(document).on('click', '.add_data', function(){
+            let form = document.createElement('form');
+            form.action = "venda/formulario";
+            form.method = 'POST';
+
+            my_tb=document.createElement('INPUT');
+            my_tb.type='TEXT';
+            my_tb.name='comando';
+            my_tb.value='new';
+            form.appendChild(my_tb);
+
+            my_tb=document.createElement('INPUT');
+            my_tb.type='TEXT';
+            my_tb.name='id';
+            my_tb.value='2';
+            form.appendChild(my_tb);
+            
+            // the form must be in the document to submit it
+            document.body.append(form);
+
+            form.submit();
+            
         });
-    
     </script>
 <?php $this->end() ?>
 

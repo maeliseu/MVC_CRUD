@@ -5,6 +5,7 @@ namespace Source\App;
 use Source\Models\Venda;
 use Source\Models\Cliente;
 use Source\Models\Produto;
+use Source\Models\Itens;
 
 class Venda_c
 {
@@ -12,12 +13,14 @@ class Venda_c
     protected $produtos;
     protected $clientes;
     protected $vendas;
+    Protected $itens;
     
 
     public function __construct(){
         $this->clientes = new Cliente();
         $this->produtos = new Produto();
         $this->vendas = new Venda();
+        $this->itens = new Itens();
 
         // Create new Plates instance
         $this->templates = new \League\Plates\Engine('templates');
@@ -45,25 +48,34 @@ class Venda_c
         
         // Render a template
         echo $this->templates->render('venda', [
+            'url'           => URL_BASE,
             'listavendas'   => $listavendas
         ]);
     }
 
    
-    public function contact2($data)
+    public function formulario($data)
     {
-        echo "<h1>Contato2</h1>";
-        var_dump($data);
+        $ID_VEND = "1";
+        $FK_CLIENTE_ID_CLI = "10";
+        
+        foreach ($this->itens->find("FK_VENDA_ID_VEND = :ID", "ID=$ID_VEND")->fetch(true) as $lista){
+            $descricao = $this->produtos->find("ID_PROD = :ID", "ID=$lista->FK_PRODUTO_ID_PROD")->fetch();
+            $listaitens[] =[
+                'ID'                    => $lista->ID,
+                'FK_PRODUTO_ID_PROD'    => $lista->FK_PRODUTO_ID_PROD,
+                'descricao' => $descricao->DESCRICAO,
+                'quantidade' => $lista->quantidade
+            ];
 
-        $url = URL_BASE;
-        if (!$data){
-            $data['first_name'] = " ";
-            $data['last_name'] = " ";
-            $data['email'] = " ";
         }
-        // var_dump($data);
-        require __DIR__ . "/../../views/contact.php";
 
+        echo $this->templates->render('/form_venda', [
+            'ID_VEND'        => $ID_VEND,
+            'FK_CLIENTE_ID_CLI' => $FK_CLIENTE_ID_CLI,
+            'clientes'      => $this->clientes->find()->fetch(true),
+            'itens'         => $listaitens
+        ]);
     }
 
     public function error($data)
