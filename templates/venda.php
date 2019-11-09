@@ -101,31 +101,31 @@
             form.method = 'POST';
 
             my_tb=document.createElement('INPUT');
-            my_tb.type='TEXT';
+            my_tb.type='hidden';
             my_tb.name='comando';
             my_tb.value='edt';
             form.appendChild(my_tb);
 
             my_tb=document.createElement('INPUT');
-            my_tb.type='TEXT';
+            my_tb.type='hidden';
             my_tb.name='nome';
             my_tb.value=$(this).attr('data-sel_NOME');
             form.appendChild(my_tb);
 
             my_tb=document.createElement('INPUT');
-            my_tb.type='TEXT';
+            my_tb.type='hidden';
             my_tb.name='data';
             my_tb.value=$(this).attr('data-sel_DATA');
             form.appendChild(my_tb);
 
             my_tb=document.createElement('INPUT');
-            my_tb.type='TEXT';
+            my_tb.type='hidden';
             my_tb.name='id';
             my_tb.value= ID_VENDA;
             form.appendChild(my_tb);
 
             my_tb=document.createElement('INPUT');
-            my_tb.type='TEXT';
+            my_tb.type='hidden';
             my_tb.name='FK_CLIENTE_ID_CLI';
             my_tb.value= FK_CLIENTE_ID_CLI;
             form.appendChild(my_tb);

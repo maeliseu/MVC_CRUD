@@ -59,18 +59,20 @@ class Venda_c
         // var_dump($data);
         $ID_VEND = $data["id"];
         $FK_CLIENTE_ID_CLI = $data["FK_CLIENTE_ID_CLI"];
-        
-        foreach ($this->itens->find("FK_VENDA_ID_VEND = :ID", "ID=$ID_VEND")->fetch(true) as $lista){
+        $itensdavenda = $this->itens->find("FK_VENDA_ID_VEND = :ID_VEND", "ID_VEND=$ID_VEND")->fetch(true);
+        // $listaitens[]  = "" ;
+        if ($itensdavenda) {
+            foreach ($itensdavenda as $lista){
             $descricao = $this->produtos->find("ID_PROD = :ID", "ID=$lista->FK_PRODUTO_ID_PROD")->fetch();
-            $listaitens[] =[
+            $listaitens[] = [
                 'ID'                    => $lista->ID,
+                'ID_VEND'               => $ID_VEND,
                 'FK_PRODUTO_ID_PROD'    => $lista->FK_PRODUTO_ID_PROD,
                 'descricao' => $descricao->DESCRICAO,
                 'quantidade' => $lista->quantidade
             ];
-
-        }
-
+             
+            }
         echo $this->templates->render('/form_venda', [
             'ID_VEND'       => $ID_VEND,
             'nome'          => $data["nome"],
@@ -78,7 +80,26 @@ class Venda_c
             'clientes'      => $this->clientes->find()->fetch(true),
             'produtos'      => $this->produtos->find()->fetch(true),
             'itens'         => $listaitens
-        ]);
+        ]);    
+            
+        } else { 
+            echo $this->templates->render('/form_venda', [
+                'ID_VEND'       => $ID_VEND,
+                'nome'          => $data["nome"],
+                'FK_CLIENTE_ID_CLI' => $FK_CLIENTE_ID_CLI,
+                'clientes'      => $this->clientes->find()->fetch(true),
+                'produtos'      => $this->produtos->find()->fetch(true)
+            ]);
+        }  
+        //  var_dump ($listaitens);
+        // echo $this->templates->render('/form_venda', [
+        //     'ID_VEND'       => $ID_VEND,
+        //     'nome'          => $data["nome"],
+        //     'FK_CLIENTE_ID_CLI' => $FK_CLIENTE_ID_CLI,
+        //     'clientes'      => $this->clientes->find()->fetch(true),
+        //     'produtos'      => $this->produtos->find()->fetch(true),
+        //     'itens'         => $listaitens
+        // ]);
     }
 
     public function error($data)

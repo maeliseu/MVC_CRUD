@@ -26,6 +26,7 @@ class Cliente_c
 
     public function cliente($data)
     {
+        // var_dump($this->clientes->find()->fetch(true));
         // Render a template
         echo $this->templates->render('cliente', [
             'listaclientes' => $this->clientes->find()->fetch(true)

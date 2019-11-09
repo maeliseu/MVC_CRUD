@@ -49,32 +49,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($itens as $iten){ ?>
-                <tr>
-                    <td><?=$this->e($iten["descricao"])?></td>
-                    <td><?=$this->e($iten["quantidade"])?></td>
-                    <td></td>
-                    <td>
-                        <button type="button" 
-                            class="btn btn-default btn-sm edit edit_data"
-                            title="Edit" 
-                            data-toggle="tooltip"
-                            data-sel_id="<?=$this->e($iten["ID"])?>"
-                            data-FK_PRODUTO_ID_PROD="<?=$this->e($iten["FK_PRODUTO_ID_PROD"])?>">                            
-                            <i class="fas fa-pencil-alt"></i>
-                        </button>
-                        
-                        <button type="button" 
-                            class="btn btn-default btn-sm delete"
-                            title="Delete" 
-                            data-toggle="tooltip"
-                            data-sel_id="<?=$this->e($iten["ID"])?>"
-                            data-FK_PRODUTO_ID_PROD="<?=$this->e($iten["FK_PRODUTO_ID_PROD"])?>"> 
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </td>
-                </tr>
-        <?php   } ?> 
+            <?php 
+                    if (isset($itens)) {
+                        foreach ($itens as $iten){
+            ?>         
+                        <tr>
+                            <td><?=$this->e($iten['descricao']);?></td>
+                            <td><?=$this->e($iten["quantidade"]);?></td>
+                            <td></td>
+                            <td><button type="button" 
+                                        class="btn btn-default btn-sm edit edit_data"
+                                        title="Edit" 
+                                        data-toggle="tooltip"
+                                        data-sel_id=<?=$this->e($iten["ID"]);?>
+                                        data-FK_PRODUTO_ID_PROD=<?=$this->e($iten["FK_PRODUTO_ID_PROD"]);?>>                            
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>                        
+                            <button     type="button" 
+                                        class="btn btn-default btn-sm delete"
+                                        title="Delete" 
+                                        data-toggle="tooltip"
+                                        data-sel_id=<?=$this->e($iten["ID"]);?>
+                                        data-FK_PRODUTO_ID_PROD=<?=$this->e($iten["FK_PRODUTO_ID_PROD"]);?>> 
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            </td>
+                        </tr>
+            <?php       }
+                    }
+            ?> 
                 
                     </tbody>
                     <tfoot>
