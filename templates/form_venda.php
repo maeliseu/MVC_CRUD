@@ -4,22 +4,22 @@
     <div class="row">
         <div class="col-lg-5 pb-3 mx-auto bg-white rounded shadow">
             <div class="form-group">
-                <label for="formGroupExampleInput">ID:</label>
-                <label for="formGroupExampleInput"><?=$this->e($ID_VEND);?></label>
+                <label for="formGroupInput">ID venda:</label>
+                <label for="formGroupInput"><?=$this->e($ID_VEND);?></label>
             </div>
-            <div class="form-group">
-                <label for="formGroupExampleInput2">Nome:</label>
-                <input type="text" class="form-control"
-                                    aria-label="Sizing example input" 
-                                    aria-describedby="inputGroup-sizing-sm" name="ID_VEND" 
-                                    id="ID_VEND" autocomplete="off"
-                                    value="<?=$this->e($nome);?>">
+            <div class="input-group mb-3">
+                <!-- <div class="input-group-prepend"> -->
+                    <label class="input-group-text" for="inputname">Nome</label>
+                <!-- </div> -->
+                <select class="browser-default selectpicker" data-style="btn-outline-primary" data-live-search="true" data-size="5" id="inputname">
+                    
+                </select>
             </div>
 
 
 
             <button id="btn_fechar" type="button" class="btn btn-secondary">Fechar</button>
-            <button id="edt" type="button" class="btn btn-primary">Salvar mudanças</button>
+            <button id="edt_salve" type="button" class="btn btn-success">Salvar mudanças</button>
                
                 
                 
@@ -91,6 +91,7 @@
 
 <?php $this->push('scripts') ?>
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/js/bootstrap-select.min.js"></script>
     <script>
         // Some JavaScript
         $(document).ready(function () {
@@ -108,6 +109,29 @@
                     }
                 }
             });
+
+            var i=0;
+            var comboNome = document.getElementById("inputname");
+            console.log(Object.entries('clientes'));
+            for (var [key, value] of Object.entries(clientes)) {
+          
+            
+            // for (i, len = clientes.lenght; i< len; i++){
+                // var opt = document.createElement("option");
+                // opt.value = i;
+                // opt.text = cli->nome;
+                // comboNome.add(opt, comboNome.option[i]);
+                // i= ++;
+                console.log(key + ' ' + value);
+}
+      
+
+
+
+            $('select').selectpicker();
+
+
+            
         $('.dataTables_length').addClass('bs-select');
         });
         
@@ -122,4 +146,6 @@
 <?php $this->push('stylesheets') ?>
     <!-- stylesheets -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/css/bootstrap-select.min.css">
 <?php $this->end() ?>
