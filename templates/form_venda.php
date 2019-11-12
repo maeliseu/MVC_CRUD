@@ -107,9 +107,9 @@
       <div class="modal-body">
             <div class="input-group mb-3">
                 <!-- <div class="input-group-prepend"> -->
-                    <label class="input-group-text" for="inputname">Nome</label>
+                    <label class="input-group-text" for="inputproduto">Nome</label>
                 <!-- </div> -->
-                <select class="browser-default selectpicker" data-style="btn-outline-primary" data-live-search="true" data-size="5" id="inputname">
+                <select class="browser-default selectpicker" data-style="btn-outline-primary" data-live-search="true" data-size="5" id="inputproduto">
         <?PHP       foreach ($produto as $value) {
                         if ($value->ID_PROD == $setItem->FK_PRODUTO_ID_PROD) {
                             echo "<option value='".$value->ID_PROD."' selected>".$value->DESCRICAO."</option>";
@@ -120,6 +120,12 @@
         ?>
                 </select>
             </div>
+            <div class="input-group mb-3">                
+                <label class="input-group-text" for="inputquantidade">Quantidade</label>
+                <input type="text" id="inputquantidade">
+            </div>
+                
+
       </div>
       <div id="div_btn" class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -166,6 +172,8 @@
             var fk_id_prod = $(this).attr('data-FK_PRODUTO_ID_PROD'); 
             var quantidade = $(this).attr('data-quantidade');
             console.log(id+' - '+fk_id_prod+' - '+quantidade);
+
+            $('#inputquantidade').val(quantidade);
 
 
 
