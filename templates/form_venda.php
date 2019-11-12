@@ -109,13 +109,9 @@
                 <!-- <div class="input-group-prepend"> -->
                     <label class="input-group-text" for="inputproduto">Nome</label>
                 <!-- </div> -->
-                <select class="browser-default selectpicker" data-style="btn-outline-primary" data-live-search="true" data-size="5" id="inputproduto">
-        <?PHP       foreach ($produto as $value) {
-                        if ($value->ID_PROD == $setItem->FK_PRODUTO_ID_PROD) {
-                            echo "<option value='".$value->ID_PROD."' selected>".$value->DESCRICAO."</option>";
-                        }else{
-                            echo "<option value='".$value->ID_PROD."' >".$value->DESCRICAO."</option>";
-                        } 			
+                <select class="browser-default selectpicker" data-style="btn-outline-primary" data-live-search="true" data-size="5" name="inputproduto" id="inputproduto">
+        <?PHP       foreach ($produtos as $value) {
+                        echo "<option value='".$value->ID_PROD."' >".$value->DESCRICAO."</option>";                        			
                     }
         ?>
                 </select>
@@ -158,6 +154,9 @@
             });
             $('select').selectpicker();           
             $('.dataTables_length').addClass('bs-select');
+
+            
+
         });
         
         $("#btn_fechar").on('click',function() {
@@ -175,13 +174,42 @@
 
             $('#inputquantidade').val(quantidade);
 
-
-
+            
 
             
+            $('select[name=inputproduto]').selectpicker();
+
             $('#add_data_Modal').modal();
+            $('#add_data_Modal').ready(function(){
+                selectItemByValue(document.getElementById("inputproduto"), fk_id_prod);
+                
+            });
+            
+            
+            
+
+            
+
 
         });
+        function selectItemByValue(elmnt, value){
+
+            for(var i=0; i < elmnt.options.length; i++)
+            {
+                console.log(i);
+                if(elmnt.options[i].value === value) {
+                    
+                    $('select[name=inputproduto]').val(i);
+                    $('select[name=inputproduto]').selectpicker('refresh');
+                    
+
+                    console.log("oi - "+elmnt.val);
+                    break;
+                }
+            }
+        }
+        
+
         
     
     </script>
