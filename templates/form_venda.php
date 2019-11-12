@@ -134,7 +134,9 @@
 
 <?php $this->push('scripts') ?>
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/js/bootstrap-select.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/js/bootstrap-select.min.js"></script> -->
+<script src="<?=URL_BASE?>/public/js/bootstrap-select.js"></script>
+
     <script>
         // Some JavaScript
         $(document).ready(function () {
@@ -190,5 +192,6 @@
     <!-- stylesheets -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/css/bootstrap-select.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/css/bootstrap-select.min.css"> -->
+    <link rel="stylesheet" href="<?=URL_BASE?>/public/css/bootstrap-select.css">
 <?php $this->end() ?>
