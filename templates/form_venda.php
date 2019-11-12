@@ -40,7 +40,7 @@
                                 <h5>Itens: <button type="button" 
                                                     title="Adicionar" 
                                                     class="btn btn-default btn-sm add add_data">
-                                                <i class="fas fa-plus-circle" style="font-size:36px;"></i>
+                                                <i class="fas fa-plus-circle text-success" style="font-size:36px;"></i>
                                             </button>
                                 </h5>
                             </td>

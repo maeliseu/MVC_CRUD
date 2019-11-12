@@ -6,7 +6,7 @@
         <table id="dtTabProduto" class="table">
             <thead>
                 <td><h5>Produtos: <button type="button" title="Adicionar" class="btn btn-default btn-sm add add_data">
-                    <i class="fas fa-plus-circle" style="font-size:36px;"></i></h5></td>
+                    <i class="fas fa-plus-circle text-success" style="font-size:36px;"></i></h5></td>
                 <td></td>
                 <td></td>
                 <td></td>

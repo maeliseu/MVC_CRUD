@@ -20,9 +20,9 @@ table.table td button {
         
 }
 
-
 table.table td button.add {
-    color: #27C46B;
+    /* color: #27C46B; */
+    color: #93C54B;
 }
 table.table td button.add:hover {
     /* background-color: #27C46B; */
