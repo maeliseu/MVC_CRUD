@@ -12,14 +12,7 @@
                     <label class="input-group-text" for="inputname">Nome</label>
                 <!-- </div> -->
                 <select class="browser-default selectpicker" data-style="btn-outline-primary" data-live-search="true" data-size="5" id="inputname">
-        <?PHP       foreach ($clientes as $value) {
-                        if ($value->ID_CLI == $FK_CLIENTE_ID_CLI) {
-                            echo "<option value='".$value->ID_CLI."' selected>".$value->NOME."</option>";
-                        }else{
-                            echo "<option value='".$value->ID_CLI."' >".$value->NOME."</option>";
-                        } 			
-                    }
-        ?>
+                    
                 </select>
             </div>
 
@@ -115,7 +108,23 @@
                         "previous": "<i class='material-icons'>skip_previous</i>"
                     }
                 }
-            }); 
+            });
+
+            var i=0;
+            var comboNome = document.getElementById("inputname");
+            console.log(Object.entries('clientes'));
+            for (var [key, value] of Object.entries(clientes)) {
+          
+            
+            // for (i, len = clientes.lenght; i< len; i++){
+                // var opt = document.createElement("option");
+                // opt.value = i;
+                // opt.text = cli->nome;
+                // comboNome.add(opt, comboNome.option[i]);
+                // i= ++;
+                console.log(key + ' ' + value);
+}
+      
 
 
 
