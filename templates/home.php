@@ -1,7 +1,10 @@
 <?php $this->layout('layout', []) ?>
 
-<h1>Aula do Prof. Jaime</h1>
+<div class="container">
+    <h1>Aula do Prof. Jaime</h1>
 
+
+</div>
 
 
 

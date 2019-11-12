@@ -118,7 +118,7 @@
             </div>
             <div class="input-group mb-3">                
                 <label class="input-group-text" for="inputquantidade">Quantidade</label>
-                <input type="text" id="inputquantidade">
+                <input type="text"  class="form-control" id="inputquantidade">
             </div>
                 
 
