@@ -8,10 +8,10 @@
                 <label for="formGroupInput"><?=$this->e($ID_VEND);?></label>
             </div>
             <div class="input-group mb-3">
-                <!-- <div class="input-group-prepend"> -->
+                <div class="input-group-prepend">
                     <label class="input-group-text" for="inputname">Nome</label>
-                <!-- </div> -->
-                <select class="browser-default selectpicker" data-style="btn-outline-primary" data-live-search="true" data-size="5" id="inputname">
+                </div>
+                <select class="browser-default selectpicker show-tick inputname" data-style="btn-outline-primary" data-size="5" data-live-search="true" id="inputname">
         <?PHP       foreach ($clientes as $cliente) {
 						if ($cliente->ID_CLI == $FK_CLIENTE_ID_CLI) {
 							echo "<option value='".$cliente->ID_CLI."' selected>".$cliente->NOME."</option>";
@@ -109,7 +109,7 @@
                 <!-- <div class="input-group-prepend"> -->
                     <label class="input-group-text" for="inputproduto">Nome</label>
                 <!-- </div> -->
-                <select class="browser-default selectpicker" data-style="btn-outline-primary" data-live-search="true" data-size="5" name="inputproduto" id="inputproduto">
+                <select class="browser-default selectpicker inputproduto" data-style="btn-outline-primary" data-live-search="true" data-size="5" name="inputproduto" id="inputproduto">
         <?PHP       foreach ($produtos as $value) {
                         echo "<option value='".$value->ID_PROD."' >".$value->DESCRICAO."</option>";                        			
                     }
@@ -152,8 +152,8 @@
                     }
                 }
             });
-            $('select').selectpicker();           
-            $('.dataTables_length').addClass('bs-select');
+            $('.inputnamet').selectpicker('render');           
+            // $('.dataTables_length').addClass('bs-select');
             
         });
         
@@ -173,7 +173,7 @@
             
             $('#add_data_Modal').modal();
 
-            $('#inputproduto').selectpicker('val', fk_id_prod);
+            $('.inputproduto').selectpicker('val', fk_id_prod);
                        
             
             
