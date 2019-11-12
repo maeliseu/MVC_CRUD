@@ -12,7 +12,14 @@
                     <label class="input-group-text" for="inputname">Nome</label>
                 <!-- </div> -->
                 <select class="browser-default selectpicker" data-style="btn-outline-primary" data-live-search="true" data-size="5" id="inputname">
-                    
+        <?PHP       foreach ($clientes as $cliente) {
+						if ($cliente->ID_CLI == $FK_CLIENTE_ID_CLI) {
+							echo "<option value='".$cliente->ID_CLI."' selected>".$cliente->NOME."</option>";
+						}else{
+							echo "<option value='".$cliente->ID_CLI."' >".$cliente->NOME."</option>";
+						} 			
+					}
+        ?>
                 </select>
             </div>
 
@@ -62,6 +69,7 @@
                                         title="Edit" 
                                         data-toggle="tooltip"
                                         data-sel_id=<?=$this->e($iten["ID"]);?>
+                                        data-quantidade=<?=$this->e($iten["quantidade"]);?>
                                         data-FK_PRODUTO_ID_PROD=<?=$this->e($iten["FK_PRODUTO_ID_PROD"]);?>>                            
                                 <i class="fas fa-pencil-alt"></i>
                             </button>                        
@@ -88,6 +96,39 @@
     </div>
     </div>
 </div>
+<!-- ####  Modal  -->
+<div id="add_data_Modal" class="modal"  role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="modal-title" class="modal-title">Edit compra</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+            <div class="input-group mb-3">
+                <!-- <div class="input-group-prepend"> -->
+                    <label class="input-group-text" for="inputname">Nome</label>
+                <!-- </div> -->
+                <select class="browser-default selectpicker" data-style="btn-outline-primary" data-live-search="true" data-size="5" id="inputname">
+        <?PHP       foreach ($produto as $value) {
+                        if ($value->ID_PROD == $setItem->FK_PRODUTO_ID_PROD) {
+                            echo "<option value='".$value->ID_PROD."' selected>".$value->DESCRICAO."</option>";
+                        }else{
+                            echo "<option value='".$value->ID_PROD."' >".$value->DESCRICAO."</option>";
+                        } 			
+                    }
+        ?>
+                </select>
+            </div>
+      </div>
+      <div id="div_btn" class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button id="edt" type="button" class="btn btn-primary">Salvar mudanças</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ####  Modal  -->
 
 <?php $this->push('scripts') ?>
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
@@ -109,34 +150,29 @@
                     }
                 }
             });
-
-            var i=0;
-            var comboNome = document.getElementById("inputname");
-            console.log(Object.entries('clientes'));
-            for (var [key, value] of Object.entries(clientes)) {
-          
-            
-            // for (i, len = clientes.lenght; i< len; i++){
-                // var opt = document.createElement("option");
-                // opt.value = i;
-                // opt.text = cli->nome;
-                // comboNome.add(opt, comboNome.option[i]);
-                // i= ++;
-                console.log(key + ' ' + value);
-}
-      
-
-
-
-            $('select').selectpicker();
-
-
-            
-        $('.dataTables_length').addClass('bs-select');
+            $('select').selectpicker();           
+            $('.dataTables_length').addClass('bs-select');
         });
         
         $("#btn_fechar").on('click',function() {
             window.location.href = '<?=URL_BASE?>/venda';
+        });
+
+
+        $(document).on('click', '.edit_data', function(){
+            document.getElementById("modal-title").innerHTML =
+                "Edite produto comprado!";
+            var id = $(this).data('sel_id');
+            var fk_id_prod = $(this).attr('data-FK_PRODUTO_ID_PROD'); 
+            var quantidade = $(this).attr('data-quantidade');
+            console.log(id+' - '+fk_id_prod+' - '+quantidade);
+
+
+
+
+            
+            $('#add_data_Modal').modal();
+
         });
         
     
