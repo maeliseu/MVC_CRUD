@@ -57,8 +57,9 @@ class Venda_c
     public function formulario($data)
     {
         // var_dump($data);
-        $ID_VEND = $data["id"];
-        $FK_CLIENTE_ID_CLI = $data["FK_CLIENTE_ID_CLI"];
+        $ID_VEND = ($data['comando']=="edt")?$data["id"]:'';
+        $FK_CLIENTE_ID_CLI = ($data['comando']=="edt")?$data["FK_CLIENTE_ID_CLI"]:'';
+        $nome  = ($data['comando']=="edt")?$data["nome"]:'';
         $itensdavenda = $this->itens->find("FK_VENDA_ID_VEND = :ID_VEND", "ID_VEND=$ID_VEND")->fetch(true);
         // $listaitens[]  = "" ;
         if ($itensdavenda) {
@@ -74,7 +75,7 @@ class Venda_c
             }
             $render_dados = [
                 'ID_VEND'       => $ID_VEND,
-                'nome'          => $data["nome"],
+                'nome'          => $nome,
                 'FK_CLIENTE_ID_CLI' => $FK_CLIENTE_ID_CLI,
                 'clientes'      => $this->clientes->find()->fetch(true),
                 'produtos'      => $this->produtos->find()->fetch(true),
@@ -83,7 +84,7 @@ class Venda_c
         } else { 
             $render_dados = [
                 'ID_VEND'       => $ID_VEND,
-                'nome'          => $data["nome"],
+                'nome'          => $nome,
                 'FK_CLIENTE_ID_CLI' => $FK_CLIENTE_ID_CLI,
                 'clientes'      => $this->clientes->find()->fetch(true),
                 'produtos'      => $this->produtos->find()->fetch(true)
@@ -92,6 +93,29 @@ class Venda_c
         //  var_dump ($listaitens);
         echo $this->templates->render('/form_venda', $render_dados);
     }
+
+
+    public function add_prod($data)
+    {
+        session_start();
+        $url = URL_BASE;
+        $itens = new Itens();
+        // Select
+        if(isset($data['btn-add'])):
+            $itens->NOME = $data['nome'];
+            $clientes->save();
+            if (!$clientes->fail()):
+                $_SESSION['mensagem'] = "Gravado com sucesso!";
+                // header ('Location: ../cliente');
+            else:
+                $_SESSION['mensagem'] = "Falha ao gravar!";
+                // header ('Location: ../cliente');
+            endif;
+        endif;
+
+
+    }
+
 
     public function error($data)
     {

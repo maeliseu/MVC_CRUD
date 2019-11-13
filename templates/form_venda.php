@@ -11,8 +11,9 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputname">Nome</label>
                 </div>
-                <select class="browser-default selectpicker show-tick inputname" data-style="btn-outline-primary" data-size="5" data-live-search="true" id="inputname">
-        <?PHP       foreach ($clientes as $cliente) {
+                <select class="browser-default selectpicker show-tick inputname" title="Selecione um cliente" data-style="btn-outline-primary" data-size="5" data-live-search="true" id="inputname">
+        <?PHP       
+                    foreach ($clientes as $cliente) {
 						if ($cliente->ID_CLI == $FK_CLIENTE_ID_CLI) {
 							echo "<option value='".$cliente->ID_CLI."' selected>".$cliente->NOME."</option>";
 						}else{
@@ -109,7 +110,7 @@
                 <!-- <div class="input-group-prepend"> -->
                     <label class="input-group-text" for="inputproduto">Nome</label>
                 <!-- </div> -->
-                <select class="browser-default selectpicker inputproduto" data-style="btn-outline-primary" data-live-search="true" data-size="5" name="inputproduto" id="inputproduto">
+                <select class="browser-default selectpicker inputproduto" title="Selecione um produto" data-style="btn-outline-primary" data-live-search="true" data-size="5" name="inputproduto" id="inputproduto">
         <?PHP       foreach ($produtos as $value) {
                         echo "<option value='".$value->ID_PROD."' >".$value->DESCRICAO."</option>";                        			
                     }
@@ -159,16 +160,24 @@
             
         });
         
+
+        // ###
+        // ###------> botão Fechar Formulario
+        // ###
         $("#btn_fechar").on('click',function() {
             window.location.href = '<?=URL_BASE?>/venda';
         });
+
+        // ###
+        // ###------> botão edit (abre Modal)
+        // ###
         $(document).on('click', '.edit_data', function(){
             document.getElementById("modal-title").innerHTML =
                 "Edite produto comprado!";
             var id = $(this).data('sel_id');
             var fk_id_prod = $(this).attr('data-FK_PRODUTO_ID_PROD'); 
             var quantidade = $(this).attr('data-quantidade');
-            // console.log(id+' - '+fk_id_prod+' - '+quantidade);
+            //  console.log(id+' - '+fk_id_prod+' - '+quantidade);
             $('#inputquantidade').val(quantidade);
             
             
@@ -176,12 +185,66 @@
             $('#add_data_Modal').modal();
 
             $('.inputproduto').selectpicker('val', fk_id_prod);
-                       
-            
-            
-            
+
+            // ###
+            // ###------>  Botão salva alteração
+            // ###
+
         });
-        
+
+
+
+
+
+        // ###
+        // ###------> botão Add (abre Modal)
+        // ###
+        $(document).on('click', '.add_data', function(){
+            document.getElementById("modal-title").innerHTML =
+                "Adcione produto!";
+            var id = $(this).data('sel_id');
+            // var fk_id_prod = $(this).attr('data-FK_PRODUTO_ID_PROD'); 
+            // var quantidade = $(this).attr('data-quantidade');
+            //  console.log(id+' - '+fk_id_prod+' - '+quantidade);
+            // $('#inputquantidade').val(quantidade);
+            
+            
+            
+            $('#add_data_Modal').modal();
+
+            // $('.inputproduto').selectpicker('val', fk_id_prod);
+
+            // ###
+            // ###------>  Botão salva alteração
+            // ### 
+            $("#edt").on('click',function() {                    
+                let dados = {
+                    "btn-add": true,
+                    "id_prod": document.getElementById('inputproduto').value,
+                    "qantidade": document.getElementById('inputquantidade').value,
+                    "id_vend" : id
+                };
+                console.log(dados);
+                $.ajax({
+                    data: dados,
+                    url: 'venda/add_prod',
+                    method: 'POST', // or GET
+                    success: function(msg) {
+                        // console.log(msg);
+                        $('#add_data_Modal').modal('hide');
+                        window.location.href = 'formulario'
+                    },
+                    error: function (msg) {
+                        // console.log(msg);
+                        $('#add_data_Modal').modal('hide');
+                        window.location.href = 'formulario'
+                    }
+                });
+
+
+            }); 
+
+        });        
         
         
     

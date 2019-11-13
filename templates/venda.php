@@ -136,6 +136,30 @@
             form.submit();
             
         });
+
+
+        // ###
+        // ###------> botão edit (abre form_venda)
+        // ###
+        $(document).on('click', '.add_data', function(){
+
+            let form = document.createElement('form');
+            form.action = "venda/formulario";
+            form.method = 'POST';
+
+            my_tb=document.createElement('INPUT');
+            my_tb.type='hidden';
+            my_tb.name='comando';
+            my_tb.value='add';
+            form.appendChild(my_tb);
+
+
+
+            document.body.append(form);
+
+            form.submit();
+        });
+        
     </script>
 <?php $this->end() ?>
 
