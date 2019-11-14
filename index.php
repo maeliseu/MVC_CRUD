@@ -44,7 +44,8 @@ $router->get("/formulario", "Venda_c:formulario");
 $router->post("/formulario", "Venda_c:formulario");
 $router->post("/edt", "Venda_c:edt");
 $router->post("/delete", "Venda_c:delete");
-$router->post("/add_prod", "Venda_c:add_prod");
+$router->get("/add_prod", "Venda_c:error");
+$router->post("/add_prod", "Venda_c:error");
 
 
 /*

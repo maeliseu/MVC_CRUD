@@ -5,7 +5,7 @@
         <div class="col-lg-5 pb-3 mx-auto bg-white rounded shadow">
             <div class="form-group">
                 <label for="formGroupInput">ID venda:</label>
-                <label for="formGroupInput"><?=$this->e($ID_VEND);?></label>
+                <label id="id_vend" for="formGroupInput"><?=$this->e($ID_VEND);?></label>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -39,7 +39,9 @@
                         <tr>
                             <td>
                                 <h5>Itens: <button type="button" 
-                                                    title="Adicionar" 
+                                                    title="Adicionar"
+                                                    data-toggle="tooltip"
+                                                    data-ID_VEND=<?=$this->e($ID_VEND);?>
                                                     class="btn btn-default btn-sm add add_data">
                                                 <i class="fas fa-plus-circle text-success" style="font-size:36px;"></i>
                                             </button>
@@ -102,7 +104,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 id="modal-title" class="modal-title">Edit compra</h5>
+        <h5 id="modal-title" class="modal-title">Edit compra  -  ID venda: </h5>
+        <label id="modal_id_vend"></label>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
@@ -134,7 +137,9 @@
 <!-- ####  Modal  -->
 
 <?php $this->push('scripts') ?>
+
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.12/dist/js/bootstrap-select.min.js"></script> -->
 <script src="<?=URL_BASE?>/public/js/bootstrap-select.js"></script>
 
@@ -201,8 +206,10 @@
         // ###
         $(document).on('click', '.add_data', function(){
             document.getElementById("modal-title").innerHTML =
-                "Adcione produto!";
-            var id = $(this).data('sel_id');
+                "Adcione produto!    -  ID venda: ";
+            var id = $(this).attr('data-ID_VEND');
+            document.getElementById("modal_id_vend").innerHTML =
+                id;
             // var fk_id_prod = $(this).attr('data-FK_PRODUTO_ID_PROD'); 
             // var quantidade = $(this).attr('data-quantidade');
             //  console.log(id+' - '+fk_id_prod+' - '+quantidade);
@@ -221,8 +228,8 @@
                 let dados = {
                     "btn-add": true,
                     "id_prod": document.getElementById('inputproduto').value,
-                    "qantidade": document.getElementById('inputquantidade').value,
-                    "id_vend" : id
+                    "quantidade": document.getElementById('inputquantidade').value,
+                    "id_vend" : id,
                 };
                 console.log(dados);
                 $.ajax({
@@ -230,14 +237,14 @@
                     url: 'venda/add_prod',
                     method: 'POST', // or GET
                     success: function(msg) {
-                        // console.log(msg);
+                        console.log(msg);
                         $('#add_data_Modal').modal('hide');
-                        window.location.href = 'formulario'
+                        // window.location.href = 'formulario'
                     },
                     error: function (msg) {
-                        // console.log(msg);
-                        $('#add_data_Modal').modal('hide');
-                        window.location.href = 'formulario'
+                        console.log(msg);
+                        // $('#add_data_Modal').modal('hide');
+                        // window.location.href = 'formulario'
                     }
                 });
 

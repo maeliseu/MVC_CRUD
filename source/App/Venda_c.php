@@ -97,19 +97,27 @@ class Venda_c
 
     public function add_prod($data)
     {
+        
+        // var_dump ($data);
         session_start();
         $url = URL_BASE;
         $itens = new Itens();
         // Select
+        
         if(isset($data['btn-add'])):
-            $itens->NOME = $data['nome'];
-            $clientes->save();
-            if (!$clientes->fail()):
+            $itens->FK_VENDA_ID_VEND = $data['id_vend'];
+            $itens->FK_PRODUTO_ID_PROD = $data['id_prod'];
+            $itens->quantidade = $data['quantidade'];
+
+            $itens->save();
+
+            if (!$itens->fail()):
                 $_SESSION['mensagem'] = "Gravado com sucesso!";
-                // header ('Location: ../cliente');
+                // header ('Location: ../venda/formulario');
+                return ("ok");
             else:
                 $_SESSION['mensagem'] = "Falha ao gravar!";
-                // header ('Location: ../cliente');
+                // header ('Location: ../venda');
             endif;
         endif;
 
