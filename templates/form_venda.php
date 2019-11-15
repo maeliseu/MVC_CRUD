@@ -209,20 +209,10 @@
                 "Adcione produto!    -  ID venda: ";
             var id = $(this).attr('data-ID_VEND');
             document.getElementById("modal_id_vend").innerHTML =
-                id;
-            // var fk_id_prod = $(this).attr('data-FK_PRODUTO_ID_PROD'); 
-            // var quantidade = $(this).attr('data-quantidade');
-            //  console.log(id+' - '+fk_id_prod+' - '+quantidade);
-            // $('#inputquantidade').val(quantidade);
-            
-            
-            
+                id;            
             $('#add_data_Modal').modal();
-
-            // $('.inputproduto').selectpicker('val', fk_id_prod);
-
             // ###
-            // ###------>  Botão salva alteração
+            // ###------>  Botão salva alteração de ADD
             // ### 
             $("#edt").on('click',function() {                    
                 let dados = {
@@ -234,23 +224,22 @@
                 console.log(dados);
                 $.ajax({
                     data: dados,
-                    url: 'venda/add_prod',
+                    url: '<?=URL_BASE?>/venda/add_prod',
                     method: 'POST', // or GET
                     success: function(msg) {
                         console.log(msg);
                         $('#add_data_Modal').modal('hide');
                         // window.location.href = 'formulario'
+                        window.location.reload();
                     },
                     error: function (msg) {
                         console.log(msg);
-                        // $('#add_data_Modal').modal('hide');
+                        $('#add_data_Modal').modal('hide');
                         // window.location.href = 'formulario'
+                        window.location.reload();
                     }
                 });
-
-
             }); 
-
         });        
         
         

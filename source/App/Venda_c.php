@@ -101,20 +101,22 @@ class Venda_c
         // var_dump ($data);
         session_start();
         $url = URL_BASE;
-        $itens = new Itens();
+        
         // Select
         
         if(isset($data['btn-add'])):
-            $itens->FK_VENDA_ID_VEND = $data['id_vend'];
-            $itens->FK_PRODUTO_ID_PROD = $data['id_prod'];
-            $itens->quantidade = $data['quantidade'];
+            $item_s = new Itens();
+            $item_s->FK_VENDA_ID_VEND = $data['id_vend'];
+            $item_s->FK_PRODUTO_ID_PROD = $data['id_prod'];
+            $item_s->quantidade = $data['quantidade'];
+            // var_dump($item_s);
+            $item_s->save();
+            // var_dump($item_s);
 
-            $itens->save();
-
-            if (!$itens->fail()):
+            if (!$item_s->fail()):
                 $_SESSION['mensagem'] = "Gravado com sucesso!";
                 // header ('Location: ../venda/formulario');
-                return ("ok");
+                // return ("ok");
             else:
                 $_SESSION['mensagem'] = "Falha ao gravar!";
                 // header ('Location: ../venda');
