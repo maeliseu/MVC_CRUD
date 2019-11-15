@@ -8,6 +8,6 @@ class Itens extends DataLayer
 {
     public function __construct()
     {
-        parent::__construct("itens", [], "ID", true);
+        parent::__construct("itens", [], "ID", false);
     }
 }
