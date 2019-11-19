@@ -17,6 +17,7 @@ class Venda_c
     
 
     public function __construct(){
+        session_start();
         $this->clientes = new Cliente();
         $this->produtos = new Produto();
         $this->vendas = new Venda();
