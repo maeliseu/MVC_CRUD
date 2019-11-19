@@ -184,13 +184,8 @@
             var quantidade = $(this).attr('data-quantidade');
             //  console.log(id+' - '+fk_id_prod+' - '+quantidade);
             $('#inputquantidade').val(quantidade);
-            
-            
-            
             $('#add_data_Modal').modal();
-
             $('.inputproduto').selectpicker('val', fk_id_prod);
-
             // ###
             // ###------>  Botão salva alteração edt
             // ###
@@ -219,8 +214,7 @@
                         window.location.reload();
                     }
                 });
-            }); 
-
+            });
         });
 
 

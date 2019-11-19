@@ -139,7 +139,7 @@
 
 
         // ###
-        // ###------> botão edit (abre form_venda)
+        // ###------> botão Add (abre form_venda)
         // ###
         $(document).on('click', '.add_data', function(){
 
@@ -152,8 +152,6 @@
             my_tb.name='comando';
             my_tb.value='add';
             form.appendChild(my_tb);
-
-
 
             document.body.append(form);
 
