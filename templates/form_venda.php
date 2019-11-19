@@ -81,7 +81,7 @@
                                         title="Delete" 
                                         data-toggle="tooltip"
                                         data-sel_id=<?=$this->e($iten["ID"]);?>
-                                        data-FK_PRODUTO_ID_PROD=<?=$this->e($iten["FK_PRODUTO_ID_PROD"]);?>> 
+                                        data-sel_descricao=<?=$this->e($iten["descricao"]);?>> 
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                             </td>
@@ -108,7 +108,7 @@
         <label id="modal_id_vend"></label>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
-      <div class="modal-body">
+      <div id="modal-body" class="modal-body">
             <div class="input-group mb-3">
                 <!-- <div class="input-group-prepend"> -->
                     <label class="input-group-text" for="inputproduto">Nome</label>
@@ -192,8 +192,34 @@
             $('.inputproduto').selectpicker('val', fk_id_prod);
 
             // ###
-            // ###------>  Botão salva alteração
+            // ###------>  Botão salva alteração edt
             // ###
+            $("#edt").on('click',function() {                    
+                let dados = {
+                    "btn-edt": true,                 
+                    "id_prod": document.getElementById('inputproduto').value,
+                    "quantidade": document.getElementById('inputquantidade').value,
+                    "id_iten" : id,
+                };
+                // console.log(dados);
+                $.ajax({
+                    data: dados,
+                    url: '<?=URL_BASE?>/venda/edt_prod',
+                    method: 'POST', // or GET
+                    success: function(msg) {
+                        console.log(msg);
+                        $('#add_data_Modal').modal('hide');
+                        // window.location.href = 'formulario'
+                        window.location.reload();
+                    },
+                    error: function (msg) {
+                        console.log(msg);
+                        $('#add_data_Modal').modal('hide');
+                        // window.location.href = 'formulario'
+                        window.location.reload();
+                    }
+                });
+            }); 
 
         });
 
@@ -240,7 +266,39 @@
                     }
                 });
             }); 
-        });        
+        });
+        
+        // ###
+        // ###------> Button del
+        // ###
+        $(".delete").on('click',function() {
+            var tex = $(this).data('sel_id');
+            var tex2 = $(this).data('sel_descricao');
+            document.getElementById("modal-title").innerHTML =
+                "Deletar produto: ";
+            document.getElementById("modal-body").innerHTML =
+                tex2;
+            document.getElementById("div_btn").innerHTML =
+                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>'+
+                '<button id="del" type="button" class="btn btn-danger">Deletar</button>';
+           
+            $('#sel_id').val(tex);  
+            $('#add_data_Modal').modal();
+            // ###
+            // ###------> Button acept del
+            // ###
+            $("#del").on('click',function() {
+                $.ajax({
+                    data: 'id=' + tex,
+                    url: '<?=URL_BASE?>/venda/del_prod',
+                    method: 'POST', // or GET
+                    success: function(msg) {
+                        $('#add_data_Modal').modal('hide');
+                        window.location.reload();
+                    }
+                });
+            });
+        });
         
         
     

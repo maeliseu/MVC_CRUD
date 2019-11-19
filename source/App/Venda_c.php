@@ -95,6 +95,41 @@ class Venda_c
     }
 
 
+    public function edt_prod($data)
+    {
+        
+        session_start();
+        $url = URL_BASE;
+        $itens = new Itens();
+        // Select
+        if(isset($data['id_iten'])):
+	        $selectiten = $itens->findById($data['id_iten']);
+        endif;
+        // var_dump ($data);
+        
+        
+        if(isset($data['btn-edt'])):
+            
+            
+            $selectiten->FK_PRODUTO_ID_PROD = $data['id_prod'];
+            $selectiten->quantidade = $data['quantidade'];
+            // var_dump($item_s);
+            $selectiten->save();
+            // var_dump($item_s);
+
+            if (!$selectiten->fail()):
+                $_SESSION['mensagem'] = "Gravado com sucesso!";
+                // header ('Location: ../venda/formulario');
+                // return ("ok");
+            else:
+                $_SESSION['mensagem'] = "Falha ao gravar!";
+                // header ('Location: ../venda');
+            endif;
+        endif;
+    }
+
+
+
     public function add_prod($data)
     {
         
@@ -122,8 +157,28 @@ class Venda_c
                 // header ('Location: ../venda');
             endif;
         endif;
+    }
 
+    public function del_prod($data)
+    {
+        session_start();
+        $url = URL_BASE;
+        $itens = new Itens();
+        // Select
+        if(isset($data['id'])):
+	        $selectiten = $itens->findById($data['id']);
+        endif;
 
+        $selectiten->destroy();
+        
+        if (!$selectiten->fail()):
+            $_SESSION['mensagem'] = "Dado deletado com sucesso!";
+            // header ('Location: ../cliente');            
+        else:
+            $_SESSION['mensagem'] = "Falha ao deletar!";
+            // header ('Location: ../cliente');// Render a template
+            
+        endif;
     }
 
 
